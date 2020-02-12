@@ -1,21 +1,11 @@
 #!/usr/bin/perl
-###
+### Korey O'Dell - ACME Media
 ## History:
 # Aug 3,2010 - Added analyzeaudioes module to troubleshoot audio ts packet arrival times A
 # Aug 3,2010 - Added smoothaudioes module to buffer and smooth writing of audio packets to the wire
 #
 
 $VERSION = "";
-
-#use IO::Socket::INET qw( );#
-
-# to add unicast
-#my $sock = IO::Socket::INET->new(
-#    Proto     => 'tcp',
-#    LocalPort => 1200,
-#    Listen    => 5,
-#    Reuse     => 1,
-#)
 
 
 use IO::Select;
@@ -72,9 +62,6 @@ GetOptions (
 
 ); 
 
-#print Dumper %opt;exit;
-#getopts( ":", \%opt );
-#getopts( "m:a:p:d:e:f:c:i:r:b:g:t:M:h:", \%opt );
 
 $mode = $opt{m};
 $srcaddr = $opt{a};
@@ -1936,6 +1923,7 @@ sub analyzeandrecord
     }
 }
 
+
 ###############################################################################################
 ##
 ##
@@ -3745,179 +3733,6 @@ sub analyzeaudioes
     }
 }
 
-sub experiment
-{
-
-    #print bytesToDouble('407E000000000000');
-    
-## Take 8 byte string and return corresponding double value
-#sub bytesToDouble{
-#    my $byte_str = shift;
-#        my @bytes = ();
-#
-#            ## make hex byte, then convert into integer
-#                for( my $i = 0; $i < length($byte_str) ; $i += 2){
-#                        $bytes[$i/2] = hex('0x' . substr($byte_str, $i, 2) );
-#                            }
-#                                
-#                                    $byte_str = pack('C8', reverse(@bytes));
-#                                        my $double_value = unpack("d", $byte_str);
-#                                            $double_value = sprintf("%0.3f", $double_value);
-#                                                return $double_value;
-#                                                }
-#
-#                                                }
-    #goto skip;
-    #my $c = pack "C8", reverse(0,0,0,0x00,0x12, 0x34, 0x56, 0x78); 
-#my $c = pack "L!", 3694224353 >> 1;
-#open(FH, ">foo.bin");
-#print FH $c;
-#print "\nUNPACKED ".unpack "L!", $c;
-#close FH;
-#exit;
-
-#my $c = pack "L", 3694224353;# >> 1;
-#open(FH, ">foo.bin");
-#print FH $c;
-#exit;
-
-open(FH, $ARGV[0]);
-binmode FH;
-my ($buf, $srcmsg, $n); 
-while (($n = read FH, $srcmsg, 188) != 0) 
-{
-    @bytes =  unpack "(C11 x177)*", $srcmsg; 
-#    print "\nscalar bytes ".scalar(@bytes);
- #   print "\nlength of ".length($bytes[5]);
-    $p0= $bytes[0];
-    $p1 = $bytes[1];
-    $p2 = $bytes[2];
-    $p3 = $bytes[3];
-    $p1 = $p1 & 0x1f;
-    $pid = $p2 | ($p1 << 8);
-    $cc = $p3;
-    $af = ($cc >> 4) & 0x03;
-    $sc = ($cc >> 6) & 0x03;
-    $cc = $cc & 0x0f;
-    my $afl = $bytes[4];
-    my $afdata = $bytes[5];
-    my $pcrflag = (($afdata >> 4) & 0x01);
-    if($pid == 2000 && $pcrflag )
-    {
-
-        if(($af == 2 || $af == 3)  && $pcrflag && $afl > 1)
-        {
-            print "\npid [$pid] cc [$cc] af [$af] afl [$afl] afd [$afdata]";
-            my $pcr = unpack "L", pack "C4", ($bytes[9], $bytes[8], $bytes[7], $bytes[6]);
-            my $pcrb = $bytes[10] >> 7;
-            $pcr = $pcr << 1;
-            $pcr += $pcrb;
-            print "pcrf [$pcrflag] pcr [$pcr]";
-        }
-    }
-}
-exit;
-
-
-# 0000000 0747 3dd0 1007 186e f0b1 bcfe 76e8 bc49
-
-my $a=305419896;
-#my $a= ;#305419896;
-$b = pack "L!", $a;
-print "\nKO want 3,694,224,353"; 
-#print "\nKO ".unpack "L!", $b;
-#my $c = pack "C8", reverse(0x12, 0x34, 0x56, 0x78); works
-#my $c = pack "C8", reverse(0,0,0,0x01,0x12, 0x34, 0x56, 0x78); 
-#my $c = pack "C8", reverse(0,0,0,0x01,0xff, 0xff, 0xff, 0xff); # = 8,589,934,591
-my $c = pack "C8", reverse(0,0,0x00,0x00,0xf0, 0xb1, 0x18, 0x6e);#  = 4,038,137,966 
-    $c=pack "L!", 3694224353;
-#3694224353 = X << 1
-#print "\nKO1 ".(3694224353 >> 1);
-#print FH pack "L!", (3694224353 >> 1); # b1f0 6e18 0000 0000
-
-my $c = pack "L!", 3694224353;
-my $c = pack "C8", reverse(0,0,0,0, 0xf0, 0xb1, 0x18, 0x6e);#  = 4,038,137,966 
-print  FH $c;
-my $val = unpack ("L!", $c);
-#$val = $val >> 1;
-print "\nKO results ".$val;
-exit;
-
-#@3054198961847112176
-
-#$c = $c >> 1;
-#my $c = pack "C8", reverse(0,0,0,0x00,0x6e, 0x18, 0xb1, 0xf0);#  = 1,847,112,176 
-print FH $c;
-print "\nKO results ".unpack "L!", $c;
-exit;
- skip:
-open(FH, $ARGV[0]);
-binmode FH;
-my ($buf, $srcmsg, $n); 
-while (($n = read FH, $srcmsg, 188) != 0) 
-{ 
-    my @bytes =  unpack "(C10 x178)*", $srcmsg; 
-    print "\scalar bytes ".scalar(@bytes);
-    $p0= $bytes[0];
-    $p1 = $bytes[1];
-    $p2 = $bytes[2];
-    $p3 = $bytes[3];
-    $p1 = $p1 & 0x1f;
-    $pid = $p2 | ($p1 << 8);
-    $cc = $p3;
-    $af = ($cc >> 4) & 0x03;
-    $sc = ($cc >> 6) & 0x03;
-    $cc = $cc & 0x0f;
-    my $afl = $bytes[4];
-    my $afdata = $bytes[5];
-    my $pcrflag = ($afdata >> 4) & 0x01;
-
-
-    my $c = pack "L!",  0,0,0,0,$bytes[6], $bytes[7], $bytes[8], $bytes[9];
-    open(FH, ">foo.bin");
-    print FH $c;    
-    exit;
-
-
-
-
-
-
-    $byte_str = pack('C4', "0x".$bytes[6],"0x".$bytes[7],"0x".$bytes[8],"0x".$bytes[9]);
-    print "\nKO ".unpack("L!", $byte_str);
-    my ($double_value) = unpack("L!", $byte_str);
-    print "\n d $double_value";
-    $pcrbase = sprintf("%0.3f", $double_value);
-    print "\npid $pid cc $cc af $af afl $afl afdata $afdata pcrflag $pcrflag pcrbase $pcrbase";
-    print "\n";
-}
-
-
-exit;
-# 2^33 = 8,589,934,592
-  #     4,294,967,295
-# p0=47 p1=07 p2=d0 p3=3d p4=07 p5=10 p6=6e p7=18
-#my $packet = "
-# 0000000 0747 3dd0 1007 186e f0b1 bcfe 76e8 bc49
-# 0000020 3fe5 f7b1 21c1 3df4 89ce 24d7 5723 7f2
-
-# 3,694,224,353
-#packet 74 PCR: 3694224353: ext: 188 pcr-delta-from-last:3197, ave tpp:57, bitrate:2371025.20, play time:0.00
-#0000000   G  \a 320   =  \a 020   n 030 261 360 376 274 350   v   I 274
-#0000020 345   ? 261 367 301   ! 364   = 316 211 327   $   #   W   ' 177
-#0000040 333 005 274 035   v 035   "   2 317 350 240   3 023 231 243 254
-#0000060 333 374   p 205   % 317 244 020 203 217   e 023 344 006   g 320
-#0000100 372 234   L 362 037 006 253 362 337   = 375   /   Z 367 361 245
-#0000120 005 212 377 355   m   9   k   , 032   J 243 341   R     353 001
-#0000140   X   1 255   Q   i 252 252   u   4 254 212   n   L 266 273 335
-#0000160 241 324   2   w 204 275 356   i   ;       \   B 004 327 020   k
-#0000200   '   @ 323 276   % 036   n   = 270 351   ^ 300 373   q 365 352
-#0000220   I 364 375   E 334   ) 354   1 364 336   & 237 333   F   1 275
-#0000240   & 325 224   ]   ^ 332   X 325 276 261 034 300 367  \a 323 271
-#0000260   " 222 223 271 356   1  \t 347 267 032   n 374
-#";
-
-}
 
 sub _addstr
 {
