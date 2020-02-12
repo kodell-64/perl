@@ -89,7 +89,7 @@ The framework was heavily employed and used for every software release for almos
 
 The *automated_test_framework* contains lots of "working" code i.e. it's messy. The test framework was a heavy-duty component for many years in a now acquired successful VC startup.
 
-## Perl for audio pattern recognition
+## Professional project: Perl for audio pattern recognition
 
 I completed a proof-of-concept, audio-pattern matching algorithm using FFT science and hashing of the generated fingerprints. 
 
@@ -108,7 +108,7 @@ Uses:
 #### History
  * I also wrote a version of this in pthreaded C to harness multiple (12-16) CPU cores.
 
-## Digital content analyzer, written in Perl
+## Professional project: Digital content analyzer, written in Perl
 
 Another enterprise-level application coded to provide CLI-tool analysis of MPEG-TS digital audio/video streams.
 
