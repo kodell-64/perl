@@ -1,8 +1,8 @@
 ### About Me
 
-I have been writing fullstack web-apps, control systems, test frameworks, monitoring solutions, log analyzers and parsets and many other software solutions  in Perl for over twenty years now.
+I have been writing full stack web-apps, control systems, test frameworks, monitoring solutions, log analyzers and parsers and many other software solutions in Perl for over twenty years now.
 
-I hold certification in Perl from *Batky-Howell* Training Solutions (batky-howell.com)
+I hold certifications in Perl from *Batky-Howell* Training Solutions (batky-howell.com)
 
 Below is a small example of some of the projects I have written in Perl.
 
@@ -93,8 +93,23 @@ The *storable_adventure_game* code is a light example of a OOP web app and using
 
 I completed a proof-of-concept, audio-pattern matching algorithm using FFT science and hashing of the generated fingerprints. 
 
+#### Design
 
-####
+Uses:
+ * Fast-fourier transform used to 'discretize' frequency and time values of mono, PCM s16le (original) audio samples.
+ * energy 'fingerprints' are hashed to database table and each 125ms sample is represented by 8, 64 bit integers (512 bits).
+ * closed-captioning information is also extracted, datastored
+ * uses Inline-C module for embedding C in critical sections for performance
+ * mysql database functions for datastore
+ 
+#### Notes:
+ * heavy POC (proof of concept) code so it is messy. 
+ 
+#### History
+ * I also wrote a version of this in pthreaded C to harness multiple (12-16) CPU cores.
+
+
+
 More code examples to come.
 
 
