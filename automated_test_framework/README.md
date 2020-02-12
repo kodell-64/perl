@@ -32,3 +32,14 @@ our @ISA = qw( TestClass );
 ```
 
 With that we have a AvcdTest object that is populated with data for each test that is to be executed. The test object contains test-specific inputs, paramaters, and expected outputs.
+
+### Technologies used
+
+The framework employs several CPAN Perl packages for I/O and other needs. We've mentioned IPC-Run, IO-Tee is another and is used for 'tee'ing together all STDOUT/STDERR output from the framework.
+
+```
+$tee = IO::Tee->new(\*STDOUT,">results/$packagename/$fullVersion/$fullVersion.log");
+open(STDOUT, ">&$tee");
+open(STDERR, ">&$tee");#/dev/null"); 
+select $tee;
+```
