@@ -1,4 +1,5 @@
 Object-oriented Perl test framework.
+Author: Korey O'Dell
 
 ### Design
 Originally written circa 2007, expanded, maintained through 2016.
@@ -31,7 +32,7 @@ Instantiation of the test framework creates a AVCD test object (avcdtests.pm) wh
 our @ISA = qw( TestClass );
 ```
 
-With that we have a AvcdTest object that is populated with data for each test that is to be executed. The test object contains test-specific inputs, paramaters, and expected outputs.
+With that we have a AvcdTest object that is populated with data for each test that is to be executed. The test object contains test-specific inputs, parameters, and expected outputs.
 
 ### Technologies used
 
@@ -43,3 +44,12 @@ open(STDOUT, ">&$tee");
 open(STDERR, ">&$tee");#/dev/null"); 
 select $tee;
 ```
+
+### History
+
+The framework was heavily employed and used for every software release for almost ten years. It 
+ * validated new features
+ * regression tested for side-effect defects from code changes
+ * provided performance/benchmark stats and metrics
+ * even validated operating system 'image' changes
+ * generated testing reports and documentation for audit needs.
