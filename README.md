@@ -6,9 +6,7 @@ I hold certifications in Perl from *Batky-Howell Training Solutions* (batky-howe
 
 Below is a small example of some of the projects I have written in Perl.
 
-### OOP-Perl
-
-### Adventure game for teaching purposes
+## Adventure game for teaching purposes
 
 I created a adventure game in OOP-Perl, code is located in the *storable_adventure_game* directory.
 It demonstrates inheritance and multiple-inheritance with Perl, in a fun container.
@@ -24,7 +22,7 @@ Runs under under Apache 2.x with mod_fast_cgi.
 
 Written for material to teach others about OOP-Perl.
 
-### Professional project: Automated Testing Framework
+## Professional project: Automated Testing Framework
 
 #### Design
 Originally written circa 2007, expanded, maintained through 2016.
@@ -91,9 +89,7 @@ The framework was heavily employed and used for every software release for almos
 
 The *automated_test_framework* contains lots of "working" code i.e. it's messy. The test framework was a heavy-duty component for many years in a now acquired successful VC startup.
 
-
-
-### Perl for audio pattern recognition
+## Perl for audio pattern recognition
 
 I completed a proof-of-concept, audio-pattern matching algorithm using FFT science and hashing of the generated fingerprints. 
 
@@ -112,7 +108,7 @@ Uses:
 #### History
  * I also wrote a version of this in pthreaded C to harness multiple (12-16) CPU cores.
 
-### Digital content analyzer, written in Perl
+## Digital content analyzer, written in Perl
 
 Another enterprise-level application coded to provide CLI-tool analysis of MPEG-TS digital audio/video streams.
 
