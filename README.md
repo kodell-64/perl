@@ -2,7 +2,7 @@
 
 I have been writing full stack web-apps, control systems, test frameworks, monitoring solutions, log analyzers and parsers and many other software solutions in Perl for over twenty years now.
 
-I hold certifications in Perl from *Batky-Howell* Training Solutions (batky-howell.com)
+I hold certifications in Perl from *Batky-Howell Training Solutions* (batky-howell.com)
 
 Below is a small example of some of the projects I have written in Perl.
 
@@ -19,6 +19,10 @@ It uses the *Storable* CPAN module for simple data persistence to disk.
 
 Very light example of OOP-Perl and storable (file-based) data.
 Runs under under Apache 2.x with mod_fast_cgi.
+
+#### History
+
+Written for material to teach others about OOP-Perl.
 
 ### Professional project: Automated Testing Framework
 
@@ -85,9 +89,9 @@ The framework was heavily employed and used for every software release for almos
  * generated testing reports and documentation for audit needs.
 
 
-Both the *automated_test_framework* and the storable_adventure_game exhibit object-oriented packages with multiple inheritance. The former contains lots of "working" code i.e. it's messy. The test framework was a heavy-duty component for many years in a now acquired successful VC startup.
+The *automated_test_framework* contains lots of "working" code i.e. it's messy. The test framework was a heavy-duty component for many years in a now acquired successful VC startup.
 
-The *storable_adventure_game* code is a light example of a OOP web app and using Storable, file-based persistence for a datastore. Written to teach and highlight Perl's package-based OOP abilities. 
+
 
 ### Perl for audio pattern recognition
 
@@ -108,6 +112,17 @@ Uses:
 #### History
  * I also wrote a version of this in pthreaded C to harness multiple (12-16) CPU cores.
 
+### Digital content analyzer, written in Perl
+
+Another enterprise-level application coded to provide CLI-tool analysis of MPEG-TS digital audio/video streams.
+
+Tool allowed for many analysis steps to be performed, many based on the ISO/IEC 13818-2 MPEG-2/Video specification.
+
+Examples are: UDP bitrate, PCR jitter/bitrate, MDI-DF, elementary streams breakdown, program PIDS, scrambling bits.
+
+Both SPTS and MPTS (single program transport stream) and (multiple program transport stream) muxes are supported.
+
+Located in the ts_tool directory.
 
 
 More code examples to come.
