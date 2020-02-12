@@ -16,8 +16,8 @@ local $deep_scan_enabled=0;
 local $drilldown_enabled=1;
 local @skips=(-2048, -1024, -512, -256, 0);#, 512, 1024, 2048);#-1024,-512,0,512,1024);#;#=(-640);#-512, -256, 0);#(-756, -640, -512, -384, -256, -128, 0);#=(256,2048+256);#(-2048, -1024, -768, -512, 0);#-2048-768, -512,0,512, 768);#(-1024, -768, -512, 0, 512, 768, 1024);#-1024);#-1024);#,-512);#,-512,0);#-1024, -512, 0, 512, 1024);#(-1024, 0, 1024);#, -512, 0, 512, 1024);#32,-128);#(0,32,256,512,1024);#863#(0,32,64,256,512,1024,2048);#(0,8,32,2048);#(0,8,32,64,512,1024,2048);
 use Time::Local;
-my $dbh = DBI->connect("DBI:mysql:database=mt_audible;host=127.0.0.1",
-                    "mt", "0Hunter",
+my $dbh = DBI->connect("DBI:mysql:database=audible;host=127.0.0.1",
+                    "mt", "*****",
                     {'RaiseError' => 1});
 if(! $dbh) { die "No db connection" }
 
@@ -52,7 +52,7 @@ while($ref)
 
 print "\nreading in all ad chunks...";
 # read in all ads
-my $sql = "select * from ad_chunks;";# where ad_id=5654;";# where ad_id<4650;";# where ad_id=3878;";# where ad_id=3877;";# where ad_id=1150;";# where ad_id=1149 or ad_id=1150;";# or ad_id=1150;";# where ad_id=1142;";
+my $sql = "select * from ad_chunks;";
 my $sth = $dbh->prepare($sql);
 $sth->execute( );
 my $ref = $sth->fetchrow_hashref();
@@ -96,20 +96,12 @@ while($ref)
 
 #print Dumper $buckets;#ad_tip_tail;
 print "\ndone";
-if(0){
-foreach my $key (sort {$a <=> $b} keys %{$buckets})
-{
-    print "\nbucket: $key";
-}
-print Dumper $buckets;
-sleep 100;
-}
+
 @main::ad_chunks = sort { $a <=> $b } keys %{$main::ad_chunks};
 
 while(1)
 {
-    #$buckets = ();
-    #my $buckets;
+
     # lock content table
     my $locked = 0;
     while($locked)
