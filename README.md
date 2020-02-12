@@ -1,4 +1,10 @@
-### A small subset of Perl projects I have authored
+### About Me
+
+I have been writing fullstack web-apps, control systems, test frameworks, monitoring solutions, log analyzers and parsets and many other software solutions  in Perl for over twenty years now.
+
+I hold certification in Perl from *Batky-Howell* Training Solutions (batky-howell.com)
+
+Below is a small example of some of the projects I have written in Perl.
 
 ### OOP-Perl
 
