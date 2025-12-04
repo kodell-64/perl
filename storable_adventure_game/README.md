@@ -1,4 +1,4 @@
-### Adventure Game, Korey O'Dell.
+### Adventure Game.
 
 ### Design
 
